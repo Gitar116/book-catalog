@@ -2,7 +2,6 @@ package com.testtask.bookcatalog;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.testtask.bookcatalog.controller.BookController;
 import com.testtask.bookcatalog.model.Book;
 import com.testtask.bookcatalog.model.GroupBook;
 import com.testtask.bookcatalog.model.TitleLetterCount;
@@ -33,9 +32,6 @@ class BookCatalogITTests {
 
     @Autowired
     private MockMvc mockMvc;
-
-    @Autowired
-    private BookController bookController;
 
     @Test
     public void orderedBookListByTitleITTest() throws Exception {
