@@ -1,4 +1,4 @@
-package com.testtask.bookcatalog;
+package com.testtask.bookcatalog.integration;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;

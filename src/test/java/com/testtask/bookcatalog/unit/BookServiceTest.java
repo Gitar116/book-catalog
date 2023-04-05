@@ -1,4 +1,4 @@
-package com.testtask.bookcatalog.service;
+package com.testtask.bookcatalog.unit;
 
 import com.testtask.bookcatalog.model.Book;
 import com.testtask.bookcatalog.repository.BookRepository;
@@ -16,7 +16,7 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 @SpringBootTest
-class BookServiceImplTest {
+class BookServiceTest {
 
     private final List<Book> bookList = asList(
             new Book(1L, "Crime and Punishment", "F. Dostoevsky", null),
