@@ -105,7 +105,7 @@ class BookServiceTest {
                         .findFirst().orElseThrow().getBooks().get(0).getTitle()
         );
         assertEquals(
-                1,
+                2,
                 actual.stream()
                         .filter(groupBook -> groupBook.getAuthor().equalsIgnoreCase("N. Gogol"))
                         .findFirst().orElseThrow().getBooks().size()
