@@ -11,18 +11,20 @@ import org.springframework.boot.test.context.SpringBootTest;
 import java.util.List;
 import static java.util.Arrays.asList;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 @SpringBootTest
 class BookServiceImplTest {
 
-    private List<Book> bookList = asList(
+    private final List<Book> bookList = asList(
             new Book(1L, "Crime and Punishment", "F. Dostoevsky", null),
             new Book(2L, "Anna Karenina", "L. Tolstoy", null),
             new Book(3L, "The Brothers Karamazov", "F. Dostoevsky", null),
             new Book(4L, "War and Peace", "L. Tolstoy", null),
-            new Book(5L, "Dead Souls", "N. Gogol", null)
+            new Book(5L, "Dead Souls", "N. Gogol", null),
+            new Book(5L, "aaaaaaa", "N. Gogol", null)
     );
 
     @Mock
@@ -133,12 +135,15 @@ class BookServiceImplTest {
                         .getLetterCount()
         );
         assertEquals(
-                1,
+                8,
                 actual.stream()
                         .filter(author -> author.getAuthor().equalsIgnoreCase("N. Gogol"))
                         .findFirst().orElseThrow()
                         .getLetterCount()
         );
+        assertTrue(actual.get(0).getAuthor().equalsIgnoreCase("N. Gogol"));
+        assertTrue(actual.get(1).getAuthor().equalsIgnoreCase("L. Tolstoy"));
+        assertTrue(actual.get(2).getAuthor().equalsIgnoreCase("F. Dostoevsky"));
         assertEquals(3, actual.size());
     }
 }

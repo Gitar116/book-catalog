@@ -9,9 +9,8 @@ import lombok.AllArgsConstructor;
 import lombok.NonNull;
 import lombok.val;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
-
+import static java.util.Comparator.comparing;
 import static java.util.stream.Collectors.toList;
 import static java.util.stream.Collectors.toSet;
 import static org.springframework.util.StringUtils.countOccurrencesOf;
@@ -39,7 +38,7 @@ public class BookServiceImpl implements BookService {
     @Override
     public List<GroupBook> groupedBookListByAuthor() {
         val bookList = bookRepository.findAll();
-        val authorSet = bookList.stream().map(book -> book.getAuthor()).collect(toSet());
+        val authorSet = bookList.stream().map(Book::getAuthor).collect(toSet());
 
         return authorSet.stream().map(author -> createGroupBook(author, bookList)).collect(toList());
     }
@@ -47,12 +46,13 @@ public class BookServiceImpl implements BookService {
     @Override
     public List<TitleLetterCount> titleLetterCountList(final String letter) {
         val bookList = bookRepository.findAll();
-        val authorSet = bookList.stream().map(book -> book.getAuthor()).collect(toSet());
+        val authorSet = bookList.stream().map(Book::getAuthor).collect(toSet());
 
         return authorSet.stream()
                 .map(author -> createTitleLetterCount(author, bookList, letter))
                 .filter(titleLetterCount -> titleLetterCount.getLetterCount() > MIN_LETTER_COUNT)
                 .limit(LIMIT_AUTHOR_LIST)
+                .sorted(comparing(TitleLetterCount::getLetterCount).reversed())
                 .collect(toList());
     }
 
